@@ -31,8 +31,10 @@ exports.handleUpload = async(req, res) => {
     try {
         if(req.file){
             res.status(200).send({ error: false, message: "upload success" });
+            console.log("Client Success Upload File");
         } else {
             res.status(400).send({ error: true, message: "file require"});
+            console.log("Client Failed Upload File");
         }
     } catch (err) {
         console.log("Error during uploading: ", err);
