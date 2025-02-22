@@ -17,11 +17,23 @@ const storage = multer.diskStorage({
     },
 });
 
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/mp4'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('wrong type'), false);
+    }
+  };
+
 const uploadFile = (req, res, next) => {
-    multer({ storage }).single('file')(req, res, (err) => {
+    multer({ storage, fileFilter }).single('file')(req, res, (err) => {
         if (err) {
-            console.log("Multer error:", err);
-            return res.status(500).json({ error: true, message: "File upload failed" });
+            if (err == "Error: wrong type") {
+                return res.status(400).json({ error: true, message: "Hanya file audio yang diperbolehkan!" });
+            } else {
+                return res.status(500).json({ error: true, message: "File upload failed" });
+            }
         }
         next();
     });
