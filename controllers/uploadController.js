@@ -30,7 +30,7 @@ const uploadFile = (req, res, next) => {
     multer({ storage, fileFilter }).single('file')(req, res, (err) => {
         if (err) {
             if (err == "Error: wrong type") {
-                return res.status(400).json({ error: true, message: "Hanya file audio yang diperbolehkan!" });
+                return res.status(400).json({ error: true, message: "Only audio file allowed" });
             } else {
                 return res.status(500).json({ error: true, message: "File upload failed" });
             }
