@@ -11,7 +11,7 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger);
 
-// app.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on PORT ${PORT}`);
