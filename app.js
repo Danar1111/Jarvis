@@ -11,6 +11,7 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger);
 
+// endpoin menggunakan /api
 app.use('/api', apiRoutes);
 
 app.listen(PORT, () => {
